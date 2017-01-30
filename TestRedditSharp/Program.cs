@@ -11,14 +11,6 @@ namespace TestRedditSharp
     {
         static void Main(string[] args)
         {
-            // ALEX WAS HERE!!!
-            int testNum = 0;
-
-            if (testNum == 0)
-            {
-                Console.WriteLine("Alex was here");
-            }
-
             Reddit reddit = null;
             var authenticated = false;
             while (!authenticated)
