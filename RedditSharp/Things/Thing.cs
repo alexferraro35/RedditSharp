@@ -246,5 +246,31 @@ namespace RedditSharp.Things
             var data = WebAgent.GetResponseString(response.GetResponseStream());
             return data;
         }
+
+        /// <summary>
+        /// Execute a simple POST request against the reddit api with a boolean flag  
+        /// Supports endpoints that require id and a flag as well as modhash as
+        /// parameters.
+        /// </summary>
+        /// <param name="endpoint"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        protected virtual string SimpleAction(string endpoint, bool state)
+        {
+            if (Reddit.User == null)
+                throw new AuthenticationException("No user logged in.");
+            var request = WebAgent.CreatePost(endpoint);
+            var stream = request.GetRequestStream();
+            WebAgent.WritePostBody(stream, new
+            {
+                id = FullName,
+                state = state,
+                uh = Reddit.User.Modhash
+            });
+            stream.Close();
+            var response = request.GetResponse();
+            var data = WebAgent.GetResponseString(response.GetResponseStream());
+            return data;
+        }
     }
 }

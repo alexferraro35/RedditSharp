@@ -20,6 +20,7 @@ namespace RedditSharp.Things
         private const string SetFlairUrl = "/r/{0}/api/flair";
         private const string MarkNSFWUrl = "/api/marknsfw";
         private const string UnmarkNSFWUrl = "/api/unmarknsfw";
+        private const string SendRepliesUrl = "/api/sendreplies";
         private const string ContestModeUrl = "/api/set_contest_mode";
         private const string StickyModeUrl = "/api/set_subreddit_sticky";
 
@@ -266,6 +267,22 @@ namespace RedditSharp.Things
         public void UnmarkNSFW()
         {
             var data = SimpleAction(UnmarkNSFWUrl);
+        }
+
+        /// <summary>
+        /// Enable inbox replies.
+        /// </summary>
+        public void EnableInboxReplies()
+        {
+            var data = SimpleAction(SendRepliesUrl, true);
+        }
+
+        /// <summary>
+        /// Disable inbox replies.
+        /// </summary>
+        public void DisableInboxReplies()
+        {
+            var data = SimpleAction(SendRepliesUrl, false);
         }
 
         /// <summary>
